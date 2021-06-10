@@ -101,8 +101,8 @@ public class Main {
                     break;
                 case 4:
                     System.out.print("Enter id you want to edit: ");
-                    id = sc.nextLine();
-                    customerManagement.edit(id);
+                    String idEdit = sc.nextLine();
+                    customerManagement.edit(idEdit);
                     break;
                 case 5:
                     customerManagement.sort();

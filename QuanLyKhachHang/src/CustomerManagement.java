@@ -34,7 +34,8 @@ public class CustomerManagement implements Management<Customer> {
             System.out.println("No customer was found!");
         } else {
             InputOutput.outputCustomer(this.getList().get(index));
-            InputOutput.inputCustomer();
+            Customer customer = InputOutput.inputCustomer();
+            this.getList().set(index, customer);
             System.out.println("Update successful");
         }
     }

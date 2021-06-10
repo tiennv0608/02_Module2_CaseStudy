@@ -1,8 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Year;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Customer {
     private String cusId;
