@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         CustomerManagement customerManagement = new CustomerManagement();
         Scanner sc = new Scanner(System.in);
+        boolean check = false;
         while (true) {
             menu();
             System.out.print("Enter your choice (0-8): ");
@@ -21,8 +22,15 @@ public class Main {
             }
             switch (choice) {
                 case 1:
-                    System.out.print("Enter id: ");
-                    String id = sc.nextLine();
+                    System.out.print("Enter id (CUSxxx): ");
+                    String id;
+                    do {
+                        id = sc.nextLine();
+                        check = Validation.validate(Validation.ID_REGEX, id);
+                        if (!check){
+                            System.out.print("Wrong input, re input:");
+                        }
+                    } while (!check);
                     if (customerManagement.checkExistedId(id)) {
                         System.out.println("Duplicated id!!!");
                     } else {
