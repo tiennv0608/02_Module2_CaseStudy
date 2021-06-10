@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class Main {
                 try {
                     choice = sc.nextInt();
                 } catch (InputMismatchException e) {
-                    System.out.print("Wrong type, re iput: ");
+                    System.out.print("Wrong type, re input: ");
                 } finally {
                     sc.nextLine();
                 }
@@ -45,7 +44,7 @@ public class Main {
                         try {
                             option = sc.nextInt();
                         } catch (InputMismatchException e) {
-                            System.out.print("Wrong type, re iput: ");
+                            System.out.print("Wrong type, re input: ");
                         } finally {
                             sc.nextLine();
                         }
@@ -112,8 +111,8 @@ public class Main {
                     System.out.print("Enter id you want to delete: ");
                     id = sc.nextLine();
                     int index = customerManagement.searchByID(id);
-                    Customer customer = customerManagement.getList().get(index);
                     if (index != -1) {
+                        Customer customer = customerManagement.getList().get(index);
                         InputOutput.outputCustomer(customer);
                         System.out.print("Do you want to delete this customer (Press Y to confirm): ");
                         String confirmation = sc.nextLine();
@@ -131,7 +130,7 @@ public class Main {
                     customerManagement.readFromFile("CustomerFile\\customer.csv");
                     break;
                 case 8:
-                    customerManagement.writeToFile("CustomerFile\\newfile.csv");
+                    customerManagement.writeToFile("CustomerFile\\new file.csv");
                     break;
                 case 0:
                     System.exit(0);
@@ -144,7 +143,7 @@ public class Main {
     }
 
     static void menu() {
-        System.out.println("--------MENU---------");
+        System.out.println("--------Menu---------");
         System.out.println("1. Add Customer");
         System.out.println("2. Show customer list");
         System.out.println("3. Search customer");
@@ -161,6 +160,5 @@ public class Main {
         System.out.println("1. Search by ID");
         System.out.println("2. Search by age range");
         System.out.println("3. Search by address");
-        System.out.println("Press 0 to return");
     }
 }

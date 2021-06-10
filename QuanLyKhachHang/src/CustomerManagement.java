@@ -49,7 +49,7 @@ public class CustomerManagement implements Management<Customer> {
     @Override
     public int searchByID(String cusId) {
         for (int i = 0; i < this.list.size(); i++) {
-            if (this.list.get(i).getCusId().equals(cusId)) {
+            if (this.getList().get(i).getCusId().equals(cusId)) {
                 return i;
             }
         }
