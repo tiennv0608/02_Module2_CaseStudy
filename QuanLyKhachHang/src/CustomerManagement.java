@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CustomerManagement implements Management<Customer> {
     private List<Customer> list;
@@ -24,21 +22,21 @@ public class CustomerManagement implements Management<Customer> {
     }
 
     @Override
-    public void delete(Customer customer) {
-        list.remove(customer);
-    }
-
-    public boolean checkById(String cusId) {
-        if (searchByID(cusId) != -1) {
-            return true;
-        } else {
-            return false;
-        }
+    public void delete(String cusId) {
+        int index = searchByID(cusId);
+        this.list.remove(index);
     }
 
     @Override
-    public void edit(Customer customer) {
-
+    public void edit(String cusId) {
+        int index = searchByID(cusId);
+        if (index == -1) {
+            System.out.println("No customer was found!");
+        } else {
+            InputOutput.outputCustomer(this.getList().get(index));
+            InputOutput.inputCustomer();
+            System.out.println("Update successful");
+        }
     }
 
     @Override
@@ -58,6 +56,26 @@ public class CustomerManagement implements Management<Customer> {
         return -1;
     }
 
+    @Override
+    public void sort() {
+        Collections.sort(this.list, new Comparator<Customer>() {
+            @Override
+            public int compare(Customer o1, Customer o2) {
+                return o1.getCusId().compareTo(o2.getCusId());
+            }
+        });
+    }
+
+    public List<Customer> searchByAgeRange(int lowerAge, int higherAge) {
+        List<Customer> searchList = new ArrayList<>();
+        for (Customer customer : this.list) {
+            if (customer.getAge() <= higherAge && customer.getAge() >= lowerAge) {
+                searchList.add(customer);
+            }
+        }
+        return searchList;
+    }
+
     public boolean checkExistedId(String id) {
         for (Customer customer : this.list) {
             if (customer.getCusId().equals(id)) {
@@ -73,8 +91,8 @@ public class CustomerManagement implements Management<Customer> {
         return this.list;
     }
 
-    public void writeToFile(String path){
-        ReadAndWriteFile.writeToFile(path,this.list);
+    public void writeToFile(String path) {
+        ReadAndWriteFile.writeToFile(path, this.list);
         System.out.println("Write complete!");
     }
 }
