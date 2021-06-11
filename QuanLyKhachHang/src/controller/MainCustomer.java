@@ -151,11 +151,11 @@ public class MainCustomer {
                     }
                     break;
                 case 7:
-                    customerManagement.readFromFile("CustomerFile\\customer.csv");
+                    customerManagement.readFromFile("File\\customer.csv");
                     System.out.println("Read complete");
                     break;
                 case 8:
-                    customerManagement.writeToFile("CustomerFile\\new file.csv");
+                    customerManagement.writeToFile("File\\new file.csv");
                     System.out.println("Write complete!");
                     break;
                 case 0:
