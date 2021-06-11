@@ -33,14 +33,6 @@ public class CustomerManagement implements Management<Customer> {
         this.readAndWriteFile = readAndWriteFile;
     }
 
-    public List<Customer> getList() {
-        return list;
-    }
-
-    public void setList(List<Customer> list) {
-        this.list = list;
-    }
-
     @Override
     public void add(Customer customer) {
         this.list.add(customer);
@@ -58,7 +50,7 @@ public class CustomerManagement implements Management<Customer> {
         if (index == -1) {
             System.out.println("No customer was found!");
         } else {
-            this.inOutCus.output(this.getList().get(index));
+            this.inOutCus.output(this.findAll().get(index));
             Customer customer = this.inOutCus.input();
             this.list.set(index, customer);
             System.out.println("Update successful");
@@ -122,11 +114,13 @@ public class CustomerManagement implements Management<Customer> {
         return false;
     }
 
+    @Override
     public List<Customer> readFromFile(String path) {
         this.list = this.readAndWriteFile.readFromFile(path);
         return this.list;
     }
 
+    @Override
     public void writeToFile(String path) {
         this.readAndWriteFile.writeToFile(path, this.list);
     }

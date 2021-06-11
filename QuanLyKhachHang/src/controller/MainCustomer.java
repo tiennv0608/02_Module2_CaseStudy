@@ -46,8 +46,8 @@ public class MainCustomer {
                     }
                     break;
                 case 2:
-                    for (int i = 0; i < customerManagement.getList().size(); i++) {
-                        customerManagement.getInOutCus().output(customerManagement.getList().get(i));
+                    for (int i = 0; i < customerManagement.findAll().size(); i++) {
+                        customerManagement.getInOutCus().output(customerManagement.findAll().get(i));
                     }
                     break;
                 case 3:
@@ -69,7 +69,7 @@ public class MainCustomer {
                             id = sc.nextLine();
                             int index = customerManagement.findById(id);
                             if (index != -1) {
-                                customerManagement.getInOutCus().output(customerManagement.getList().get(index));
+                                customerManagement.getInOutCus().output(customerManagement.findAll().get(index));
                             } else {
                                 System.out.println("No customer was found!");
                             }
@@ -136,7 +136,7 @@ public class MainCustomer {
                     id = sc.nextLine();
                     int index = customerManagement.findById(id);
                     if (index != -1) {
-                        Customer customer = customerManagement.getList().get(index);
+                        Customer customer = customerManagement.findAll().get(index);
                         customerManagement.getInOutCus().output(customer);
                         System.out.print("Do you want to delete this customer (Press Y to confirm): ");
                         String confirmation = sc.nextLine();
@@ -165,7 +165,6 @@ public class MainCustomer {
                     System.out.println("Invalid");
             }
         }
-
     }
 
     static void menu() {

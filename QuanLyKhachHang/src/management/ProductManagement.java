@@ -10,9 +10,19 @@ import java.util.List;
 
 public class ProductManagement implements Management<Product> {
     private List<Product> productList;
+    private InputOutputProduct inOutProduct;
 
     public ProductManagement() {
         productList = new ArrayList<>();
+        inOutProduct = new InputOutputProduct();
+    }
+
+    public InputOutputProduct getInOutProduct() {
+        return inOutProduct;
+    }
+
+    public void setInOutProduct(InputOutputProduct inOutProduct) {
+        this.inOutProduct = inOutProduct;
     }
 
     @Override
@@ -28,7 +38,15 @@ public class ProductManagement implements Management<Product> {
 
     @Override
     public void edit(String productId) {
-
+        int index = findById(productId);
+        if (index == -1){
+            System.out.println("No product was found");
+        } else {
+            this.inOutProduct.output(this.findAll().get(index));
+            Product product = this.inOutProduct.input();
+            this.productList.set(index,product);
+            System.out.println("Update successful");
+        }
     }
 
     @Override
@@ -64,5 +82,15 @@ public class ProductManagement implements Management<Product> {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Product> readFromFile(String path) {
+        return null;
+    }
+
+    @Override
+    public void writeToFile(String path) {
+
     }
 }

@@ -10,4 +10,6 @@ public interface Management<T> {
     int findById(String id);
     void sort();
     boolean checkExistedId(String id);
+    List<T> readFromFile(String path);
+    void writeToFile(String path);
 }
