@@ -52,6 +52,7 @@ public class CustomerManagement implements Management<Customer> {
         } else {
             this.inOutCus.output(this.findAll().get(index));
             Customer customer = this.inOutCus.input();
+            customer.setCusId(cusId);
             this.list.set(index, customer);
             System.out.println("Update successful");
         }

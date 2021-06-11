@@ -158,6 +158,11 @@ public class MainCustomer {
                     customerManagement.writeToFile("File\\new file.csv");
                     System.out.println("Write complete!");
                     break;
+                case 9:
+                    for (Customer customer: customerManagement.findAll()){
+                        System.out.println(customer);
+                    }
+                    break;
                 case 0:
                     System.exit(0);
                     break;
