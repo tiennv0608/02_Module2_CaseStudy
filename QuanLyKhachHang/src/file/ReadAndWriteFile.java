@@ -1,9 +1,14 @@
+package file;
+
+import model.Customer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadAndWriteFile {
-    public static List<Customer> readFromFile(String path) {
+public class ReadAndWriteFile implements ReadAndWrite<Customer> {
+    @Override
+    public List<Customer> readFromFile(String path) {
         List<Customer> list = new ArrayList<>();
         try {
             FileReader fr = new FileReader(path);
@@ -27,11 +32,12 @@ public class ReadAndWriteFile {
         return list;
     }
 
-    public static void writeToFile(String path, List<Customer> list) {
+    @Override
+    public void writeToFile(String path, List<Customer> list) {
         try {
             FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
-            String str = "CUS ID, Full name, Date of birth, Gender, Address, Email, Phone\n";
+            String str = "CUS ID,Full name,Date of birth,Gender,Address,Email,Phone\n";
             for (Customer customer : list) {
                 String gender = "";
                 if (customer.getGender() == 1) {

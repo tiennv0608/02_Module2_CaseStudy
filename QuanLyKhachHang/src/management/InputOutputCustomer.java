@@ -1,15 +1,22 @@
+package management;
+
+import management.interfacemanagement.InputOutput;
+import model.Validation;
+import model.Customer;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class InputOutput {
-    public static Customer inputCustomer() {
+public class InputOutputCustomer implements InputOutput<Customer> {
+    @Override
+    public Customer input() {
         Scanner scanner = new Scanner(System.in);
         boolean check = false;
         Customer customer = new Customer();
         System.out.println("Enter customer information");
         System.out.print("Enter full name: ");
         customer.setFullName(scanner.nextLine());
-        System.out.print("Enter date of birth: ");
+        System.out.print("Enter date of birth (DD-MM-YYYY): ");
         String dateOfBirth;
         do {
             dateOfBirth = scanner.nextLine();
@@ -56,7 +63,8 @@ public class InputOutput {
         return customer;
     }
 
-    public static void outputCustomer(Customer customer) {
+    @Override
+    public void output(Customer customer) {
         System.out.println("Name: " + customer.getFullName() + ", age: " + customer.getAge() + ", address: " + customer.getAddress() +
                 ", email: " + customer.getEmail() + ", phone: " + customer.getPhone());
     }

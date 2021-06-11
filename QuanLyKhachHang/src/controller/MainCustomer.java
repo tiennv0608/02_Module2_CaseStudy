@@ -1,12 +1,18 @@
+package controller;
+
+import model.Validation;
+import management.CustomerManagement;
+import model.Customer;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class MainCustomer {
     public static void main(String[] args) {
         CustomerManagement customerManagement = new CustomerManagement();
         Scanner sc = new Scanner(System.in);
-        boolean check = false;
+        boolean check;
         while (true) {
             menu();
             System.out.print("Enter your choice (0-8): ");
@@ -27,21 +33,21 @@ public class Main {
                     do {
                         id = sc.nextLine();
                         check = Validation.validate(Validation.ID_REGEX, id);
-                        if (!check){
+                        if (!check) {
                             System.out.print("Wrong input, re input:");
                         }
                     } while (!check);
                     if (customerManagement.checkExistedId(id)) {
                         System.out.println("Duplicated id!!!");
                     } else {
-                        Customer customer = InputOutput.inputCustomer();
+                        Customer customer = customerManagement.getInOutCus().input();
                         customer.setCusId(id);
                         customerManagement.add(customer);
                     }
                     break;
                 case 2:
                     for (int i = 0; i < customerManagement.getList().size(); i++) {
-                        InputOutput.outputCustomer(customerManagement.getList().get(i));
+                        customerManagement.getInOutCus().output(customerManagement.getList().get(i));
                     }
                     break;
                 case 3:
@@ -63,7 +69,7 @@ public class Main {
                             id = sc.nextLine();
                             int index = customerManagement.searchByID(id);
                             if (index != -1) {
-                                InputOutput.outputCustomer(customerManagement.getList().get(index));
+                                customerManagement.getInOutCus().output(customerManagement.getList().get(index));
                             } else {
                                 System.out.println("No customer was found!");
                             }
@@ -96,11 +102,21 @@ public class Main {
                                 System.out.println("No customer was found!");
                             } else {
                                 for (Customer customer : searchList) {
-                                    InputOutput.outputCustomer(customer);
+                                    customerManagement.getInOutCus().output(customer);
                                 }
                             }
                             break;
                         case 3:
+                            System.out.print("Enter address: ");
+                            String address = sc.nextLine();
+                            searchList = customerManagement.searchByAddress(address);
+                            if (searchList.size() == 0) {
+                                System.out.println("No customer was found!");
+                            } else {
+                                for (Customer customer : searchList) {
+                                    customerManagement.getInOutCus().output(customer);
+                                }
+                            }
                             break;
                         default:
                             System.out.println("Invalid!");
@@ -121,7 +137,7 @@ public class Main {
                     int index = customerManagement.searchByID(id);
                     if (index != -1) {
                         Customer customer = customerManagement.getList().get(index);
-                        InputOutput.outputCustomer(customer);
+                        customerManagement.getInOutCus().output(customer);
                         System.out.print("Do you want to delete this customer (Press Y to confirm): ");
                         String confirmation = sc.nextLine();
                         if (confirmation.equals("Y")) {
@@ -136,9 +152,11 @@ public class Main {
                     break;
                 case 7:
                     customerManagement.readFromFile("CustomerFile\\customer.csv");
+                    System.out.println("Read complete");
                     break;
                 case 8:
                     customerManagement.writeToFile("CustomerFile\\new file.csv");
+                    System.out.println("Write complete!");
                     break;
                 case 0:
                     System.exit(0);
@@ -152,7 +170,7 @@ public class Main {
 
     static void menu() {
         System.out.println("--------Menu---------");
-        System.out.println("1. Add Customer");
+        System.out.println("1. Add new customer");
         System.out.println("2. Show customer list");
         System.out.println("3. Search customer");
         System.out.println("4. Edit customer");

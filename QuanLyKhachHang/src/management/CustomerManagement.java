@@ -1,11 +1,36 @@
+package management;
+
+import file.ReadAndWriteFile;
+import management.interfacemanagement.Management;
+import model.Customer;
+
 import java.util.*;
 
 public class CustomerManagement implements Management<Customer> {
     private List<Customer> list;
-    Scanner scanner = new Scanner(System.in);
+    private ReadAndWriteFile readAndWriteFile;
+    private InputOutputCustomer inOutCus;
 
     public CustomerManagement() {
         list = new ArrayList<>();
+        readAndWriteFile = new ReadAndWriteFile();
+        inOutCus = new InputOutputCustomer();
+    }
+
+    public InputOutputCustomer getInOutCus() {
+        return inOutCus;
+    }
+
+    public void setInOutCus(InputOutputCustomer inOutCus) {
+        this.inOutCus = inOutCus;
+    }
+
+    public ReadAndWriteFile getReadAndWriteFile() {
+        return readAndWriteFile;
+    }
+
+    public void setReadAndWriteFile(ReadAndWriteFile readAndWriteFile) {
+        this.readAndWriteFile = readAndWriteFile;
     }
 
     public List<Customer> getList() {
@@ -18,7 +43,7 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public void add(Customer customer) {
-        list.add(customer);
+        this.list.add(customer);
     }
 
     @Override
@@ -33,16 +58,16 @@ public class CustomerManagement implements Management<Customer> {
         if (index == -1) {
             System.out.println("No customer was found!");
         } else {
-            InputOutput.outputCustomer(this.getList().get(index));
-            Customer customer = InputOutput.inputCustomer();
-            this.getList().set(index, customer);
+            this.inOutCus.output(this.getList().get(index));
+            Customer customer = this.inOutCus.input();
+            this.list.set(index, customer);
             System.out.println("Update successful");
         }
     }
 
     @Override
     public void show(List<Customer> list) {
-        for (Customer customer : list) {
+        for (Customer customer : this.list) {
             System.out.println(customer);
         }
     }
@@ -50,7 +75,7 @@ public class CustomerManagement implements Management<Customer> {
     @Override
     public int searchByID(String cusId) {
         for (int i = 0; i < this.list.size(); i++) {
-            if (this.getList().get(i).getCusId().equals(cusId)) {
+            if (this.list.get(i).getCusId().equals(cusId)) {
                 return i;
             }
         }
@@ -77,6 +102,17 @@ public class CustomerManagement implements Management<Customer> {
         return searchList;
     }
 
+    public List<Customer> searchByAddress(String address) {
+        List<Customer> searchList = new ArrayList<>();
+        for (Customer customer : this.list) {
+            if (customer.getAddress().equals(address)) {
+                searchList.add(customer);
+            }
+        }
+        return searchList;
+    }
+
+    @Override
     public boolean checkExistedId(String id) {
         for (Customer customer : this.list) {
             if (customer.getCusId().equals(id)) {
@@ -87,13 +123,11 @@ public class CustomerManagement implements Management<Customer> {
     }
 
     public List<Customer> readFromFile(String path) {
-        this.list = ReadAndWriteFile.readFromFile(path);
-        System.out.println("Read complete");
+        this.list = this.readAndWriteFile.readFromFile(path);
         return this.list;
     }
 
     public void writeToFile(String path) {
-        ReadAndWriteFile.writeToFile(path, this.list);
-        System.out.println("Write complete!");
+        this.readAndWriteFile.writeToFile(path, this.list);
     }
 }
