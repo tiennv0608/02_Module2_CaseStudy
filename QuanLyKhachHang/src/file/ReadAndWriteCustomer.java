@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadAndWriteFile implements ReadAndWrite<Customer> {
+public class ReadAndWriteCustomer implements ReadAndWrite<Customer> {
     @Override
     public List<Customer> readFromFile(String path) {
         List<Customer> list = new ArrayList<>();

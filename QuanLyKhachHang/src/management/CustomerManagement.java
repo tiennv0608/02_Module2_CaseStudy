@@ -1,6 +1,6 @@
 package management;
 
-import file.ReadAndWriteFile;
+import file.ReadAndWriteCustomer;
 import management.interfacemanagement.Management;
 import model.Customer;
 
@@ -8,12 +8,12 @@ import java.util.*;
 
 public class CustomerManagement implements Management<Customer> {
     private List<Customer> list;
-    private ReadAndWriteFile readAndWriteFile;
+    private ReadAndWriteCustomer readAndWriteCustomer;
     private InputOutputCustomer inOutCus;
 
     public CustomerManagement() {
         list = new ArrayList<>();
-        readAndWriteFile = new ReadAndWriteFile();
+        readAndWriteCustomer = new ReadAndWriteCustomer();
         inOutCus = new InputOutputCustomer();
     }
 
@@ -25,12 +25,12 @@ public class CustomerManagement implements Management<Customer> {
         this.inOutCus = inOutCus;
     }
 
-    public ReadAndWriteFile getReadAndWriteFile() {
-        return readAndWriteFile;
+    public ReadAndWriteCustomer getReadAndWriteFile() {
+        return readAndWriteCustomer;
     }
 
-    public void setReadAndWriteFile(ReadAndWriteFile readAndWriteFile) {
-        this.readAndWriteFile = readAndWriteFile;
+    public void setReadAndWriteFile(ReadAndWriteCustomer readAndWriteCustomer) {
+        this.readAndWriteCustomer = readAndWriteCustomer;
     }
 
     @Override
@@ -117,12 +117,12 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public List<Customer> readFromFile(String path) {
-        this.list = this.readAndWriteFile.readFromFile(path);
+        this.list = this.readAndWriteCustomer.readFromFile(path);
         return this.list;
     }
 
     @Override
     public void writeToFile(String path) {
-        this.readAndWriteFile.writeToFile(path, this.list);
+        this.readAndWriteCustomer.writeToFile(path, this.list);
     }
 }
