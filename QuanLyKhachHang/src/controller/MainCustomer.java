@@ -67,7 +67,7 @@ public class MainCustomer {
                         case 1:
                             System.out.print("Enter Id: ");
                             id = sc.nextLine();
-                            int index = customerManagement.searchByID(id);
+                            int index = customerManagement.findById(id);
                             if (index != -1) {
                                 customerManagement.getInOutCus().output(customerManagement.getList().get(index));
                             } else {
@@ -134,7 +134,7 @@ public class MainCustomer {
                 case 6:
                     System.out.print("Enter id you want to delete: ");
                     id = sc.nextLine();
-                    int index = customerManagement.searchByID(id);
+                    int index = customerManagement.findById(id);
                     if (index != -1) {
                         Customer customer = customerManagement.getList().get(index);
                         customerManagement.getInOutCus().output(customer);

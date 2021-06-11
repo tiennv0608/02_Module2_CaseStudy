@@ -48,13 +48,13 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public void delete(String cusId) {
-        int index = searchByID(cusId);
+        int index = findById(cusId);
         this.list.remove(index);
     }
 
     @Override
     public void edit(String cusId) {
-        int index = searchByID(cusId);
+        int index = findById(cusId);
         if (index == -1) {
             System.out.println("No customer was found!");
         } else {
@@ -66,14 +66,12 @@ public class CustomerManagement implements Management<Customer> {
     }
 
     @Override
-    public void show(List<Customer> list) {
-        for (Customer customer : this.list) {
-            System.out.println(customer);
-        }
+    public List<Customer> findAll() {
+        return this.list;
     }
 
     @Override
-    public int searchByID(String cusId) {
+    public int findById(String cusId) {
         for (int i = 0; i < this.list.size(); i++) {
             if (this.list.get(i).getCusId().equals(cusId)) {
                 return i;
@@ -84,10 +82,12 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public void sort() {
-        Collections.sort(this.list, new Comparator<Customer>() {
+        Collections.sort(findAll(), new Comparator<Customer>() {
             @Override
-            public int compare(Customer o1, Customer o2) {
-                return o1.getCusId().compareTo(o2.getCusId());
+            public int compare(Customer customer1, Customer customer2) {
+                if (customer1.getAge() == customer2.getAge())
+                    return customer1.getFullName().compareTo(customer2.getFullName());
+                return customer1.getAge() - customer2.getAge();
             }
         });
     }

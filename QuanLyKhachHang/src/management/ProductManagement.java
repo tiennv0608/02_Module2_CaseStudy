@@ -15,14 +15,6 @@ public class ProductManagement implements Management<Product> {
         productList = new ArrayList<>();
     }
 
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
-
     @Override
     public void add(Product product) {
         this.productList.add(product);
@@ -30,7 +22,7 @@ public class ProductManagement implements Management<Product> {
 
     @Override
     public void delete(String productId) {
-        int index = searchByID(productId);
+        int index = findById(productId);
         this.productList.remove(index);
     }
 
@@ -40,14 +32,12 @@ public class ProductManagement implements Management<Product> {
     }
 
     @Override
-    public void show(List<Product> list) {
-        for (Product product : list) {
-            System.out.println(product);
-        }
+    public List<Product> findAll() {
+        return this.productList;
     }
 
     @Override
-    public int searchByID(String productId) {
+    public int findById(String productId) {
         for (int i = 0; i < this.productList.size(); i++) {
             if (this.productList.get(i).getId().equals(productId)) {
                 return i;
