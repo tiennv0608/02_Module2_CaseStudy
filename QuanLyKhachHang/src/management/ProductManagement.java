@@ -36,6 +36,7 @@ public class ProductManagement implements Management<Product> {
         } else {
             inOutProduct.output(this.findAll().get(index));
             Product product = inOutProduct.input();
+            product.setId(productId);
             this.productList.set(index, product);
             System.out.println("Update successful");
         }
