@@ -57,6 +57,26 @@ public class ProductManagement implements Management<Product> {
         return -1;
     }
 
+    public List<Product> searchByPriceRange(int lowPrice, int highPrice) {
+        List<Product> searchingList = new ArrayList<>();
+        for (Product product : this.productList) {
+            if (product.getPrice() <= highPrice && product.getPrice() >= lowPrice) {
+                searchingList.add(product);
+            }
+        }
+        return searchingList;
+    }
+
+    public List<Product> searchByName(String name) {
+        List<Product> searchingList = new ArrayList<>();
+        for (Product product : this.productList) {
+            if (product.getName().equals(name)) {
+                searchingList.add(product);
+            }
+        }
+        return searchingList;
+    }
+
     @Override
     public void sort() {
         Collections.sort(this.productList, new Comparator<Product>() {

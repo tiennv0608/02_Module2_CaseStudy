@@ -2,10 +2,10 @@ package controller;
 
 import management.InputOutputProduct;
 import management.ProductManagement;
-import model.Customer;
 import model.Product;
 import model.Validation;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -74,52 +74,52 @@ public class MainProduct {
                             if (index != -1) {
                                 inputOutputProduct.output(productManagement.findAll().get(index));
                             } else {
-                                System.out.println("No customer was found!");
+                                System.out.println("No product was found!");
                             }
                             break;
                         case 2:
-//                            System.out.print("Enter lower age: ");
-//                            int lowerAge = -1;
-//                            int higherAge = -1;
-//                            while (lowerAge == -1) {
-//                                try {
-//                                    lowerAge = scanner.nextInt();
-//                                } catch (InputMismatchException e) {
-//                                    System.out.println("Wrong type");
-//                                } finally {
-//                                    scanner.nextLine();
-//                                }
-//                            }
-//                            System.out.print("Enter higher age: ");
-//                            while (higherAge == -1) {
-//                                try {
-//                                    higherAge = scanner.nextInt();
-//                                } catch (InputMismatchException e) {
-//                                    System.out.println("Wrong type");
-//                                } finally {
-//                                    scanner.nextLine();
-//                                }
-//                            }
-//                            List<Customer> searchList = productManagement.se(lowerAge, higherAge);
-//                            if (searchList.size() == 0) {
-//                                System.out.println("No customer was found!");
-//                            } else {
-//                                for (Customer customer : searchList) {
-//                                    productManagement.getInOutCus().output(customer);
-//                                }
-//                            }
+                            System.out.print("Enter name: ");
+                            String name = scanner.nextLine();
+                            List<Product> searchList = productManagement.searchByName(name);
+                            if (searchList.size() == 0) {
+                                System.out.println("No product was found!");
+                            } else {
+                                for (Product product : searchList) {
+                                    inputOutputProduct.output(product);
+                                }
+                            }
                             break;
                         case 3:
-//                            System.out.print("Enter address: ");
-//                            String address = scanner.nextLine();
-//                            searchList = productManagement.searchByAddress(address);
-//                            if (searchList.size() == 0) {
-//                                System.out.println("No customer was found!");
-//                            } else {
-//                                for (Customer customer : searchList) {
-//                                    productManagement.getInOutCus().output(customer);
-//                                }
-//                            }
+                            System.out.print("Enter lower price: ");
+                            int lowPrice = -1;
+                            int highPrice = -1;
+                            while (lowPrice == -1) {
+                                try {
+                                    lowPrice = scanner.nextInt();
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Wrong type");
+                                } finally {
+                                    scanner.nextLine();
+                                }
+                            }
+                            System.out.print("Enter higher price: ");
+                            while (highPrice == -1) {
+                                try {
+                                    highPrice = scanner.nextInt();
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Wrong type");
+                                } finally {
+                                    scanner.nextLine();
+                                }
+                            }
+                            searchList = productManagement.searchByPriceRange(lowPrice, highPrice);
+                            if (searchList.size() == 0) {
+                                System.out.println("No product was found!");
+                            } else {
+                                for (Product product : searchList) {
+                                    inputOutputProduct.output(product);
+                                }
+                            }
                             break;
                         default:
                             System.out.println("Invalid!");
@@ -141,7 +141,7 @@ public class MainProduct {
                     if (index != -1) {
                         Product product = productManagement.findAll().get(index);
                         inputOutputProduct.output(product);
-                        System.out.print("Do you want to delete this customer (Press Y to confirm): ");
+                        System.out.print("Do you want to delete this product (Press Y to confirm): ");
                         String confirmation = scanner.nextLine();
                         if (confirmation.equals("Y")) {
                             productManagement.delete(id);
@@ -150,7 +150,7 @@ public class MainProduct {
                             System.out.println("Delete failed!");
                         }
                     } else {
-                        System.out.println("No customer was found!");
+                        System.out.println("No product was found!");
                     }
                     break;
                 case 7:
