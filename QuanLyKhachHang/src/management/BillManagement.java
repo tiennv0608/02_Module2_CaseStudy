@@ -1,5 +1,6 @@
 package management;
 
+import com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer;
 import management.interfacemanagement.Management;
 import model.Bill;
 
@@ -38,8 +39,8 @@ public class BillManagement implements Management<Bill> {
 
     @Override
     public int findById(String id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getBillId().equals(id)) {
+        for (int i = 0; i < this.list.size(); i++) {
+            if (this.list.get(i).equals(id)) {
                 return i;
             }
         }
