@@ -1,5 +1,6 @@
 package management;
 
+import file.ReadAndWriteProduct;
 import management.interfacemanagement.Management;
 import model.Product;
 
@@ -10,19 +11,9 @@ import java.util.List;
 
 public class ProductManagement implements Management<Product> {
     private List<Product> productList;
-    private InputOutputProduct inOutProduct;
 
     public ProductManagement() {
         productList = new ArrayList<>();
-        inOutProduct = new InputOutputProduct();
-    }
-
-    public InputOutputProduct getInOutProduct() {
-        return inOutProduct;
-    }
-
-    public void setInOutProduct(InputOutputProduct inOutProduct) {
-        this.inOutProduct = inOutProduct;
     }
 
     @Override
@@ -38,13 +29,14 @@ public class ProductManagement implements Management<Product> {
 
     @Override
     public void edit(String productId) {
+        InputOutputProduct inOutProduct = new InputOutputProduct();
         int index = findById(productId);
-        if (index == -1){
+        if (index == -1) {
             System.out.println("No product was found");
         } else {
-            this.inOutProduct.output(this.findAll().get(index));
-            Product product = this.inOutProduct.input();
-            this.productList.set(index,product);
+            inOutProduct.output(this.findAll().get(index));
+            Product product = inOutProduct.input();
+            this.productList.set(index, product);
             System.out.println("Update successful");
         }
     }
@@ -86,11 +78,14 @@ public class ProductManagement implements Management<Product> {
 
     @Override
     public List<Product> readFromFile(String path) {
-        return null;
+        ReadAndWriteProduct readAndWriteProduct = new ReadAndWriteProduct();
+        this.productList = readAndWriteProduct.readFromFile(path);
+        return this.productList;
     }
 
     @Override
     public void writeToFile(String path) {
-
+        ReadAndWriteProduct readAndWriteProduct = new ReadAndWriteProduct();
+        readAndWriteProduct.writeToFile(path, findAll());
     }
 }

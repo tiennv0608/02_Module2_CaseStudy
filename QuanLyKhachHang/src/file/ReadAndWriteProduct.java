@@ -18,6 +18,9 @@ public class ReadAndWriteProduct implements ReadAndWrite<Product> {
                 String[] product = line.split(",");
                 list.add(new Product(product[0], product[1], Integer.parseInt(product[2]), Integer.parseInt(product[3])));
             }
+            bufferedReader.close();
+            fileReader.close();
+            System.out.println("Read complete");
         } catch (IOException e) {
             System.out.println("File not found!");
         }
@@ -36,6 +39,7 @@ public class ReadAndWriteProduct implements ReadAndWrite<Product> {
             bufferedWriter.write(str);
             bufferedWriter.close();
             fileWriter.close();
+            System.out.println("Write complete!");
         } catch (IOException e) {
             System.out.println("File not found");
         }

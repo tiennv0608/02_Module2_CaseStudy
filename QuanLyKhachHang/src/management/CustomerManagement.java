@@ -8,29 +8,9 @@ import java.util.*;
 
 public class CustomerManagement implements Management<Customer> {
     private List<Customer> list;
-    private ReadAndWriteCustomer readAndWriteCustomer;
-    private InputOutputCustomer inOutCus;
 
     public CustomerManagement() {
         list = new ArrayList<>();
-        readAndWriteCustomer = new ReadAndWriteCustomer();
-        inOutCus = new InputOutputCustomer();
-    }
-
-    public InputOutputCustomer getInOutCus() {
-        return inOutCus;
-    }
-
-    public void setInOutCus(InputOutputCustomer inOutCus) {
-        this.inOutCus = inOutCus;
-    }
-
-    public ReadAndWriteCustomer getReadAndWriteFile() {
-        return readAndWriteCustomer;
-    }
-
-    public void setReadAndWriteFile(ReadAndWriteCustomer readAndWriteCustomer) {
-        this.readAndWriteCustomer = readAndWriteCustomer;
     }
 
     @Override
@@ -46,12 +26,13 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public void edit(String cusId) {
+        InputOutputCustomer inOutCus = new InputOutputCustomer();
         int index = findById(cusId);
         if (index == -1) {
             System.out.println("No customer was found!");
         } else {
-            this.inOutCus.output(this.findAll().get(index));
-            Customer customer = this.inOutCus.input();
+            inOutCus.output(this.findAll().get(index));
+            Customer customer = inOutCus.input();
             customer.setCusId(cusId);
             this.list.set(index, customer);
             System.out.println("Update successful");
@@ -117,12 +98,14 @@ public class CustomerManagement implements Management<Customer> {
 
     @Override
     public List<Customer> readFromFile(String path) {
-        this.list = this.readAndWriteCustomer.readFromFile(path);
+        ReadAndWriteCustomer readAndWriteCustomer = new ReadAndWriteCustomer();
+        this.list = readAndWriteCustomer.readFromFile(path);
         return this.list;
     }
 
     @Override
     public void writeToFile(String path) {
-        this.readAndWriteCustomer.writeToFile(path, this.list);
+        ReadAndWriteCustomer readAndWriteCustomer = new ReadAndWriteCustomer();
+        readAndWriteCustomer.writeToFile(path, this.list);
     }
 }

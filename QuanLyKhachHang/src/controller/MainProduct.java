@@ -1,5 +1,6 @@
 package controller;
 
+import management.InputOutputProduct;
 import management.ProductManagement;
 import model.Customer;
 import model.Product;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class MainProduct {
     public static void main(String[] args) {
         ProductManagement productManagement = new ProductManagement();
+        InputOutputProduct inputOutputProduct = new InputOutputProduct();
         Scanner scanner = new Scanner(System.in);
         boolean check;
         while (true) {
@@ -41,14 +43,14 @@ public class MainProduct {
                     if (productManagement.checkExistedId(id)) {
                         System.out.println("Duplicated id!!!");
                     } else {
-                        Product product = productManagement.getInOutProduct().input();
+                        Product product = inputOutputProduct.input();
                         product.setId(id);
                         productManagement.add(product);
                     }
                     break;
                 case 2:
                     for (int i = 0; i < productManagement.findAll().size(); i++) {
-                        productManagement.getInOutProduct().output(productManagement.findAll().get(i));
+                        inputOutputProduct.output(productManagement.findAll().get(i));
                     }
                     break;
                 case 3:
@@ -70,7 +72,7 @@ public class MainProduct {
                             id = scanner.nextLine();
                             int index = productManagement.findById(id);
                             if (index != -1) {
-                                productManagement.getInOutProduct().output(productManagement.findAll().get(index));
+                                inputOutputProduct.output(productManagement.findAll().get(index));
                             } else {
                                 System.out.println("No customer was found!");
                             }
@@ -138,7 +140,7 @@ public class MainProduct {
                     int index = productManagement.findById(id);
                     if (index != -1) {
                         Product product = productManagement.findAll().get(index);
-                        productManagement.getInOutProduct().output(product);
+                        inputOutputProduct.output(product);
                         System.out.print("Do you want to delete this customer (Press Y to confirm): ");
                         String confirmation = scanner.nextLine();
                         if (confirmation.equals("Y")) {
@@ -152,12 +154,10 @@ public class MainProduct {
                     }
                     break;
                 case 7:
-                    productManagement.readFromFile("File\\customer.csv");
-                    System.out.println("Read complete");
+                    productManagement.readFromFile("File\\product.csv");
                     break;
                 case 8:
-                    productManagement.writeToFile("File\\new file.csv");
-                    System.out.println("Write complete!");
+                    productManagement.writeToFile("File\\new file product.csv");
                     break;
                 case 0:
                     System.exit(0);

@@ -1,5 +1,6 @@
 package controller;
 
+import management.InputOutputCustomer;
 import model.Validation;
 import management.CustomerManagement;
 import model.Customer;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class MainCustomer {
     public static void main(String[] args) {
         CustomerManagement customerManagement = new CustomerManagement();
+        InputOutputCustomer inputOutputCustomer = new InputOutputCustomer();
         Scanner sc = new Scanner(System.in);
         boolean check;
         while (true) {
@@ -40,14 +42,14 @@ public class MainCustomer {
                     if (customerManagement.checkExistedId(id)) {
                         System.out.println("Duplicated id!!!");
                     } else {
-                        Customer customer = customerManagement.getInOutCus().input();
+                        Customer customer = inputOutputCustomer.input();
                         customer.setCusId(id);
                         customerManagement.add(customer);
                     }
                     break;
                 case 2:
                     for (int i = 0; i < customerManagement.findAll().size(); i++) {
-                        customerManagement.getInOutCus().output(customerManagement.findAll().get(i));
+                        inputOutputCustomer.output(customerManagement.findAll().get(i));
                     }
                     break;
                 case 3:
@@ -69,7 +71,7 @@ public class MainCustomer {
                             id = sc.nextLine();
                             int index = customerManagement.findById(id);
                             if (index != -1) {
-                                customerManagement.getInOutCus().output(customerManagement.findAll().get(index));
+                                inputOutputCustomer.output(customerManagement.findAll().get(index));
                             } else {
                                 System.out.println("No customer was found!");
                             }
@@ -102,7 +104,7 @@ public class MainCustomer {
                                 System.out.println("No customer was found!");
                             } else {
                                 for (Customer customer : searchList) {
-                                    customerManagement.getInOutCus().output(customer);
+                                    inputOutputCustomer.output(customer);
                                 }
                             }
                             break;
@@ -114,7 +116,7 @@ public class MainCustomer {
                                 System.out.println("No customer was found!");
                             } else {
                                 for (Customer customer : searchList) {
-                                    customerManagement.getInOutCus().output(customer);
+                                    inputOutputCustomer.output(customer);
                                 }
                             }
                             break;
@@ -137,7 +139,7 @@ public class MainCustomer {
                     int index = customerManagement.findById(id);
                     if (index != -1) {
                         Customer customer = customerManagement.findAll().get(index);
-                        customerManagement.getInOutCus().output(customer);
+                        inputOutputCustomer.output(customer);
                         System.out.print("Do you want to delete this customer (Press Y to confirm): ");
                         String confirmation = sc.nextLine();
                         if (confirmation.equals("Y")) {
@@ -152,11 +154,9 @@ public class MainCustomer {
                     break;
                 case 7:
                     customerManagement.readFromFile("File\\customer.csv");
-                    System.out.println("Read complete");
                     break;
                 case 8:
                     customerManagement.writeToFile("File\\new file.csv");
-                    System.out.println("Write complete!");
                     break;
                 case 9:
                     for (Customer customer: customerManagement.findAll()){
