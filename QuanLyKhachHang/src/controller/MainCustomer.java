@@ -154,14 +154,11 @@ public class MainCustomer {
                     break;
                 case 7:
                     customerManagement.readFromFile("File\\customer.csv");
+                    System.out.println("Read complete");
                     break;
                 case 8:
                     customerManagement.writeToFile("File\\new file.csv");
-                    break;
-                case 9:
-                    for (Customer customer: customerManagement.findAll()){
-                        System.out.println(customer);
-                    }
+                    System.out.println("Write complete");
                     break;
                 case 0:
                     System.exit(0);

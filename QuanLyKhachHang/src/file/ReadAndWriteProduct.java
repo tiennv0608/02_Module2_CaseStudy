@@ -20,7 +20,6 @@ public class ReadAndWriteProduct implements ReadAndWrite<Product> {
             }
             bufferedReader.close();
             fileReader.close();
-            System.out.println("Read complete");
         } catch (IOException e) {
             System.out.println("File not found!");
         }
@@ -39,7 +38,6 @@ public class ReadAndWriteProduct implements ReadAndWrite<Product> {
             bufferedWriter.write(str);
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Write complete!");
         } catch (IOException e) {
             System.out.println("File not found");
         }

@@ -155,9 +155,11 @@ public class MainProduct {
                     break;
                 case 7:
                     productManagement.readFromFile("File\\product.csv");
+                    System.out.println("Read complete!");
                     break;
                 case 8:
                     productManagement.writeToFile("File\\new file product.csv");
+                    System.out.println("Write complete!");
                     break;
                 case 0:
                     System.exit(0);

@@ -3,6 +3,8 @@ package management;
 import com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer;
 import management.interfacemanagement.Management;
 import model.Bill;
+import model.Customer;
+import model.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,21 +12,21 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BillManagement implements Management<Bill> {
-    private List<Bill> list;
+    private List<Bill> billList;
 
     public BillManagement() {
-        list = new ArrayList<>();
+        billList = new ArrayList<>();
     }
 
     @Override
     public void add(Bill bill) {
-        this.list.add(bill);
+        this.billList.add(bill);
     }
 
     @Override
     public void delete(String id) {
         int index = findById(id);
-        this.list.remove(index);
+        this.billList.remove(index);
     }
 
     @Override
@@ -34,13 +36,13 @@ public class BillManagement implements Management<Bill> {
 
     @Override
     public List<Bill> findAll() {
-        return this.list;
+        return this.billList;
     }
 
     @Override
     public int findById(String id) {
-        for (int i = 0; i < this.list.size(); i++) {
-            if (this.list.get(i).equals(id)) {
+        for (int i = 0; i < this.billList.size(); i++) {
+            if (this.billList.get(i).equals(id)) {
                 return i;
             }
         }
@@ -59,7 +61,7 @@ public class BillManagement implements Management<Bill> {
 
     @Override
     public boolean checkExistedId(String id) {
-        for (Bill bill : list) {
+        for (Bill bill : billList) {
             if (bill.getBillId().equals(id)) {
                 return true;
             }

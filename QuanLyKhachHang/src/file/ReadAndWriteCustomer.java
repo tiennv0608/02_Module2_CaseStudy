@@ -26,7 +26,6 @@ public class ReadAndWriteCustomer implements ReadAndWrite<Customer> {
             }
             br.close();
             fr.close();
-            System.out.println("Read complete");
         } catch (IOException e) {
             System.out.println("File not found or missing!");
         }
@@ -52,7 +51,6 @@ public class ReadAndWriteCustomer implements ReadAndWrite<Customer> {
             bw.write(str);
             bw.close();
             fw.close();
-            System.out.println("Write complete!");
         } catch (IOException ex) {
             System.out.println("File not found or missing");
         }

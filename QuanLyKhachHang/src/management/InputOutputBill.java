@@ -38,8 +38,20 @@ public class InputOutputBill implements InputOutput<Bill> {
             }
         } while (!productManagement.checkExistedId(productId));
         int indexProduct = productManagement.findById(productId);
-
-        bill.setProduct(productList.get(indexProduct));
+        Product product = productList.get(indexProduct);
+        System.out.print("Enter quantity: ");
+        int quantity = -1;
+        while (quantity == -1) {
+            try {
+                quantity = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("Wrong type!! Re input: ");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        product.setQuantity(quantity);
+        bill.setProduct(product);
         return bill;
     }
 
