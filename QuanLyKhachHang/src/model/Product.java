@@ -1,6 +1,6 @@
 package model;
 
-public class Product {
+public class Product implements Cloneable {
     private String id;
     private String name;
     private int quantity;
