@@ -7,7 +7,9 @@ import management.ProductManagement;
 import model.Bill;
 import model.Customer;
 import model.Product;
+import model.Validation;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,19 +18,43 @@ public class MainBill {
         Scanner scanner = new Scanner(System.in);
         BillManagement billManagement = new BillManagement();
         InputOutputBill inputOutputBill = new InputOutputBill();
-        CustomerManagement customerManagement = new CustomerManagement();
-        ProductManagement productManagement = new ProductManagement();
-        List<Customer> customerList = customerManagement.readFromFile("File\\new file.csv");
-        List<Product> productList = productManagement.readFromFile("File\\product.csv");
-        Bill bill = new Bill("Biill001", customerList.get(2), productList.get(2));
-        inputOutputBill.output(bill);
         while (true) {
-            System.out.print("Enter bill id: ");
-            String id = scanner.nextLine();
-            Bill bill1 = inputOutputBill.input();
-            bill1.setBillId(id);
-            billManagement.add(bill1);
-            inputOutputBill.output(bill1);
+            menu();
+            System.out.print("Enter your choice: ");
+            int choice = -1;
+            while (choice == -1) {
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.print("Wrong type, re input: ");
+                } finally {
+                    scanner.nextLine();
+                }
+            }
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter bill id: ");
+                    String id = scanner.nextLine();
+                    if (billManagement.checkExistedId(id)) {
+                        System.out.println("Duplicated id!!!");
+                    } else {
+                        Bill bill = inputOutputBill.input();
+                        bill.setBillId(id);
+                        billManagement.add(bill);
+                    }
+                    break;
+                case 2:
+                    for (Bill bill : billManagement.findAll()) {
+                        inputOutputBill.output(bill);
+                    }
+                    break;
+            }
         }
+    }
+
+    static void menu() {
+        System.out.println("--------Menu----------");
+        System.out.println("1. Add bill");
+        System.out.println("2. Show bill");
     }
 }

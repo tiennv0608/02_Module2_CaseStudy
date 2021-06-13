@@ -6,6 +6,8 @@ import model.Customer;
 import model.Product;
 
 import java.util.InputMismatchException;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputOutputBill implements InputOutput<Bill> {
@@ -15,30 +17,29 @@ public class InputOutputBill implements InputOutput<Bill> {
         Bill bill = new Bill();
         CustomerManagement customerManagement = new CustomerManagement();
         ProductManagement productManagement = new ProductManagement();
-        System.out.print("Enter your id: ");
-        String cusId = scanner.nextLine();
+        List<Customer> customerList = customerManagement.readFromFile("File\\customer.csv");
+        List<Product> productList = productManagement.readFromFile("File\\product.csv");
+        System.out.print("Enter id customer: ");
+        String cusId;
+        do {
+            cusId = scanner.nextLine();
+            if (!customerManagement.checkExistedId(cusId)) {
+                System.out.print("Wrong customer information! Re input: ");
+            }
+        } while (!customerManagement.checkExistedId(cusId));
         int indexCustomer = customerManagement.findById(cusId);
-        if (indexCustomer != -1) {
-            bill.setCustomer(customerManagement.findAll().get(indexCustomer));
-        } else {
-            Customer customer = new InputOutputCustomer().input();
-            customer.setCusId(cusId);
-            bill.setCustomer(customer);
-        }
+        bill.setCustomer(customerList.get(indexCustomer));
         System.out.print("Enter product id: ");
-        String productId = scanner.nextLine();
+        String productId;
+        do {
+            productId = scanner.nextLine();
+            if (!productManagement.checkExistedId(productId)) {
+                System.out.print("Wrong product information! Re input: ");
+            }
+        } while (!productManagement.checkExistedId(productId));
         int indexProduct = productManagement.findById(productId);
-        if (indexProduct != -1) {
-            Product product = productManagement.findAll().get(indexProduct);
-            System.out.print("Enter quantity: ");
-            int quantity = scanner.nextInt();
-            product.setQuantity(quantity);
-            bill.setProduct(product);
-        } else {
-            Product product = new InputOutputProduct().input();
-            product.setId(productId);
-            bill.setProduct(product);
-        }
+
+        bill.setProduct(productList.get(indexProduct));
         return bill;
     }
 
