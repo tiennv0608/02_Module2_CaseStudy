@@ -30,7 +30,6 @@ public class InputOutputBill implements InputOutput<Bill> {
         int indexCustomer = customerManagement.findById(cusId);
         Customer customer = customerList.get(indexCustomer);
         bill.setCustomer(customer);
-        System.out.println(customer);
         System.out.print("Enter product id: ");
         String productId;
         do {
@@ -64,9 +63,6 @@ public class InputOutputBill implements InputOutput<Bill> {
         productManagement.writeToFile("File\\product.csv");
         product.setQuantity(quantity);
         bill.setProduct(product);
-        for (Product product1 : productList) {
-            System.out.println(product1);
-        }
         return bill;
     }
 

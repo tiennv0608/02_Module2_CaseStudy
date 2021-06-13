@@ -5,7 +5,6 @@ import management.ProductManagement;
 import model.Product;
 import model.Validation;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +16,7 @@ public class MainProduct {
         Scanner scanner = new Scanner(System.in);
         boolean check;
         while (true) {
-            menu();
+            menuProduct();
             System.out.print("Enter your choice (0-8): ");
             int choice = -1;
             while (choice == -1) {
@@ -54,7 +53,7 @@ public class MainProduct {
                     }
                     break;
                 case 3:
-                    searchingMenu();
+                    searchingProduct();
                     System.out.print("Enter option: ");
                     int option = -1;
                     while (option == -1) {
@@ -170,7 +169,7 @@ public class MainProduct {
         }
     }
 
-    static void menu() {
+    static void menuProduct() {
         System.out.println("--------Menu---------");
         System.out.println("1. Add new product");
         System.out.println("2. Show product list");
@@ -183,7 +182,7 @@ public class MainProduct {
         System.out.println("0. Exit");
     }
 
-    static void searchingMenu() {
+    static void searchingProduct() {
         System.out.println("------Searching menu-------");
         System.out.println("1. Search by ID");
         System.out.println("2. Search by name");

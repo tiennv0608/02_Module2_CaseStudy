@@ -16,7 +16,7 @@ public class MainCustomer {
         Scanner sc = new Scanner(System.in);
         boolean check;
         while (true) {
-            menu();
+            menuCustomer();
             System.out.print("Enter your choice (0-8): ");
             int choice = -1;
             while (choice == -1) {
@@ -53,7 +53,7 @@ public class MainCustomer {
                     }
                     break;
                 case 3:
-                    searchingMenu();
+                    searchingCustomerInformation();
                     System.out.print("Enter option: ");
                     int option = -1;
                     while (option == -1) {
@@ -169,7 +169,7 @@ public class MainCustomer {
         }
     }
 
-    static void menu() {
+    static void menuCustomer() {
         System.out.println("--------Menu---------");
         System.out.println("1. Add new customer");
         System.out.println("2. Show customer list");
@@ -182,7 +182,7 @@ public class MainCustomer {
         System.out.println("0. Exit");
     }
 
-    static void searchingMenu() {
+    static void searchingCustomerInformation() {
         System.out.println("------Searching menu-------");
         System.out.println("1. Search by ID");
         System.out.println("2. Search by age range");
