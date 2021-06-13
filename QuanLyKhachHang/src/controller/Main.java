@@ -10,13 +10,17 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainBill {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-       boolean check = false;
+        BillManagement billManagement = new BillManagement();
+        InputOutputBill inputOutputBill = new InputOutputBill();
+        CustomerManagement customerManagement = new CustomerManagement();
+        InputOutputCustomer inputOutputCustomer = new InputOutputCustomer();
+        ProductManagement productManagement = new ProductManagement();
+        InputOutputProduct inputOutputProduct = new InputOutputProduct();
+        boolean check = false;
         while (true) {
-            BillManagement billManagement = new BillManagement();
-            InputOutputBill inputOutputBill = new InputOutputBill();
             mainMenu();
             System.out.print("Enter your choice: ");
             int choice = -1;
@@ -30,7 +34,6 @@ public class MainBill {
                 }
             }
             switch (choice) {
-
                 case 1:
                     menuBill();
                     System.out.print("Enter your choice: ");
@@ -46,8 +49,15 @@ public class MainBill {
                     }
                     switch (choice) {
                         case 1:
-                            System.out.print("Enter bill id: ");
+                            System.out.print("Enter Bill id (BILLXXX): ");
                             String id = scanner.nextLine();
+                            do {
+                                id = scanner.nextLine();
+                                check = Validation.validate(Validation.BILL_ID_REGEX, id);
+                                if (!check) {
+                                    System.out.print("Wrong input, re input:");
+                                }
+                            } while (!check);
                             if (billManagement.checkExistedId(id)) {
                                 System.out.println("Duplicated id!!!");
                             } else {
@@ -72,8 +82,6 @@ public class MainBill {
                     }
                     break;
                 case 2:
-                    CustomerManagement customerManagement = new CustomerManagement();
-                    InputOutputCustomer inputOutputCustomer = new InputOutputCustomer();
                     menuCustomer();
                     System.out.print("Enter your choice (0-8): ");
                     choice = -1;
@@ -216,14 +224,12 @@ public class MainBill {
                             System.out.println("Read complete");
                             break;
                         case 8:
-                            customerManagement.writeToFile("File\\new file.csv");
+                            customerManagement.writeToFile("File\\customer.csv");
                             System.out.println("Write complete");
                             break;
                     }
                     break;
                 case 3:
-                    ProductManagement productManagement = new ProductManagement();
-                    InputOutputProduct inputOutputProduct = new InputOutputProduct();
                     check = false;
                     while (true) {
                         menuProduct();
@@ -367,7 +373,7 @@ public class MainBill {
                                 System.out.println("Read complete!");
                                 break;
                             case 8:
-                                productManagement.writeToFile("File\\new file product.csv");
+                                productManagement.writeToFile("File\\product.csv");
                                 System.out.println("Write complete!");
                                 break;
                             default:
