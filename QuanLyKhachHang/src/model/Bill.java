@@ -38,6 +38,7 @@ public class Bill {
 
     public void setProduct(Product product) {
         this.product = product;
+        setTotal();
     }
 
     public int getTotal() {
@@ -45,7 +46,7 @@ public class Bill {
     }
 
     public void setTotal() {
-        this.total = product.getQuantity() * product.getPrice();
+        this.total = this.product.getQuantity() * this.product.getPrice();
     }
 
     @Override

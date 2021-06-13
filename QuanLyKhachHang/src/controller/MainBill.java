@@ -20,8 +20,15 @@ public class MainBill {
         ProductManagement productManagement = new ProductManagement();
         List<Customer> customerList = customerManagement.readFromFile("File\\new file.csv");
         List<Product> productList = productManagement.readFromFile("File\\product.csv");
-        Bill bill = new Bill("Biill001",customerList.get(2),productList.get(2));
+        Bill bill = new Bill("Biill001", customerList.get(2), productList.get(2));
         inputOutputBill.output(bill);
-
+        while (true) {
+            System.out.print("Enter bill id: ");
+            String id = scanner.nextLine();
+            Bill bill1 = inputOutputBill.input();
+            bill1.setBillId(id);
+            billManagement.add(bill1);
+            inputOutputBill.output(bill1);
+        }
     }
 }
