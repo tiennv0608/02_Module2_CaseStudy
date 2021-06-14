@@ -50,7 +50,7 @@ public class Main {
                     switch (choice) {
                         case 1:
                             System.out.print("Enter Bill id (BILLXXX): ");
-                            String id = scanner.nextLine();
+                            String id;
                             do {
                                 id = scanner.nextLine();
                                 check = Validation.validate(Validation.BILL_ID_REGEX, id);

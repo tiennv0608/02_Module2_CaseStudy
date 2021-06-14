@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="821.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="777.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <TableView fx:id="tableView" layoutX="219.0" layoutY="2.0" prefHeight="703.0" prefWidth="804.0">
         <columns>
@@ -30,9 +31,13 @@
       <Label layoutY="202.0" text="Address" />
       <Label layoutY="249.0" text="Email" />
       <Label layoutX="-1.0" layoutY="295.0" text="Phone" />
-      <Button fx:id="submit" layoutX="-5.0" layoutY="341.0" mnemonicParsing="false" onAction="#add" text="Submit" />
-      <Button layoutX="96.0" layoutY="341.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
-      <Button fx:id="btClear" layoutX="-4.0" layoutY="392.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
-      <Button layoutX="96.0" layoutY="392.0" mnemonicParsing="false" onAction="#importList" text="import" />
+      <Button fx:id="submit" layoutX="-5.0" layoutY="341.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Button layoutX="97.0" layoutY="392.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+      <Button fx:id="btClear" layoutX="-4.0" layoutY="392.0" mnemonicParsing="false" onAction="#clear" prefWidth="54.0" text="Clear" />
+      <Button layoutX="96.0" layoutY="446.0" mnemonicParsing="false" onAction="#importList" text="Import" />
+      <Button layoutY="446.0" mnemonicParsing="false" onAction="#exportList" text="Export" />
+      <Button layoutX="96.0" layoutY="341.0" mnemonicParsing="false" onAction="#update" text="Update" />
+      <FontAwesomeIcon strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Button layoutX="-1.0" layoutY="493.0" mnemonicParsing="false" onAction="#searchByAddress" text="Search" />
    </children>
 </AnchorPane>
