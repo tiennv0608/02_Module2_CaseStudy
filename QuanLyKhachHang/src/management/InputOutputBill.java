@@ -22,15 +22,27 @@ public class InputOutputBill implements InputOutput<Bill> {
         List<Product> productList = productManagement.readFromFile(Main.PRODUCT_PATH);
         System.out.print("Enter id customer: ");
         String cusId;
+        boolean check;
         do {
             cusId = scanner.nextLine();
-            if (!customerManagement.checkExistedId(cusId)) {
+            check = customerManagement.checkExistedId(cusId);
+            if (!check) {
                 System.out.print("Wrong customer information! Re input: ");
+            } else {
+                int indexCustomer = customerManagement.findById(cusId);
+                System.out.print("Are you " + customerList.get(indexCustomer).getFullName() + " " + customerList.get(indexCustomer).getPhone() + ": ");
+                String answer = scanner.nextLine();
+                if (answer.equals("Y")) {
+                    Customer customer = customerList.get(indexCustomer);
+                    bill.setCustomer(customer);
+                } else {
+                    check = false;
+                    System.out.print("Enter your id: ");
+                }
             }
-        } while (!customerManagement.checkExistedId(cusId));
-        int indexCustomer = customerManagement.findById(cusId);
-        Customer customer = customerList.get(indexCustomer);
-        bill.setCustomer(customer);
+        } while (!check);
+
+
         System.out.print("Enter product id: ");
         String productId;
         do {
