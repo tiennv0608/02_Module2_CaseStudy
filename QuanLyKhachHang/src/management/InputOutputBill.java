@@ -41,41 +41,47 @@ public class InputOutputBill implements InputOutput<Bill> {
                 }
             }
         } while (!check);
-
-
         System.out.print("Enter product id: ");
         String productId;
         do {
             productId = scanner.nextLine();
-            if (!productManagement.checkExistedId(productId)) {
+            check = productManagement.checkExistedId(productId);
+            if (!check) {
                 System.out.print("Wrong product information! Re input: ");
-            }
-        } while (!productManagement.checkExistedId(productId));
-        int indexProduct = productManagement.findById(productId);
-        Product product = productList.get(indexProduct);
-        System.out.println(product);
-        System.out.print("Enter quantity: ");
-        int quantity = -1;
-        while (quantity == -1) {
-            try {
-                quantity = scanner.nextInt();
-                while (quantity > product.getQuantity()) {
-                    if (quantity > product.getQuantity()) {
-                        System.out.print("Too much!! Re input: ");
-                        quantity = scanner.nextInt();
+            } else {
+                int indexProduct = productManagement.findById(productId);
+                System.out.print("Do you want to buy " + productList.get(indexProduct) + ": ");
+                String answer = scanner.nextLine();
+                if (answer.equals("Y")) {
+                    Product product = productList.get(indexProduct);
+                    System.out.print("Enter quantity: ");
+                    int quantity = -1;
+                    while (quantity == -1) {
+                        try {
+                            quantity = scanner.nextInt();
+                            while (quantity > product.getQuantity()) {
+                                if (quantity > product.getQuantity()) {
+                                    System.out.print("Too much!! Re input: ");
+                                    quantity = scanner.nextInt();
+                                }
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.print("Wrong type!! Re input: ");
+                        } finally {
+                            scanner.nextLine();
+                        }
                     }
+                    Product inventoryProduct = new Product(product.getId(), product.getName(), product.getQuantity() - quantity, product.getPrice());
+                    productList.set(indexProduct, inventoryProduct);
+                    productManagement.writeToFile(Main.PRODUCT_PATH);
+                    product.setQuantity(quantity);
+                    bill.setProduct(product);
+                } else {
+                    check = false;
+                    System.out.print("Enter product id: ");
                 }
-            } catch (InputMismatchException e) {
-                System.out.print("Wrong type!! Re input: ");
-            } finally {
-                scanner.nextLine();
             }
-        }
-        Product inventoryProduct = new Product(product.getId(), product.getName(), product.getQuantity() - quantity, product.getPrice());
-        productList.set(indexProduct, inventoryProduct);
-        productManagement.writeToFile(Main.PRODUCT_PATH);
-        product.setQuantity(quantity);
-        bill.setProduct(product);
+        } while (!check);
         return bill;
     }
 
