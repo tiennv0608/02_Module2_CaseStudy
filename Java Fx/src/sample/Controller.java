@@ -106,7 +106,6 @@ public class Controller implements Initializable {
     }
 
     public void importList(ActionEvent e) {
-        customers.clear();
         CustomerManagement customerManagement = new CustomerManagement();
         List<Customer> customerList = customerManagement.readFromFile("customer.csv");
         customers.addAll(customerList);

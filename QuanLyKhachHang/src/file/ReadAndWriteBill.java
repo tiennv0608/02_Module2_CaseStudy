@@ -1,5 +1,6 @@
 package file;
 
+import controller.Main;
 import management.CustomerManagement;
 import management.ProductManagement;
 import model.Bill;
@@ -17,8 +18,8 @@ public class ReadAndWriteBill implements ReadAndWrite<Bill> {
         try {
             CustomerManagement customerManagement = new CustomerManagement();
             ProductManagement productManagement = new ProductManagement();
-            List<Customer> customerList = customerManagement.readFromFile("File\\customer.csv");
-            List<Product> productList = productManagement.readFromFile("File\\product.csv");
+            List<Customer> customerList = customerManagement.readFromFile(Main.CUSTOMER_PATH);
+            List<Product> productList = productManagement.readFromFile(Main.PRODUCT_PATH);
             list = new ArrayList<>();
             FileReader fileReader = new FileReader(path);
             BufferedReader bufferedReader = new BufferedReader(fileReader);

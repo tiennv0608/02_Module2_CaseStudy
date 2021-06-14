@@ -1,5 +1,6 @@
 package management;
 
+import controller.Main;
 import management.interfacemanagement.InputOutput;
 import model.Bill;
 import model.Customer;
@@ -17,8 +18,8 @@ public class InputOutputBill implements InputOutput<Bill> {
         Bill bill = new Bill();
         CustomerManagement customerManagement = new CustomerManagement();
         ProductManagement productManagement = new ProductManagement();
-        List<Customer> customerList = customerManagement.readFromFile("File\\customer.csv");
-        List<Product> productList = productManagement.readFromFile("File\\product.csv");
+        List<Customer> customerList = customerManagement.readFromFile(Main.CUSTOMER_PATH);
+        List<Product> productList = productManagement.readFromFile(Main.PRODUCT_PATH);
         System.out.print("Enter id customer: ");
         String cusId;
         do {
@@ -60,7 +61,7 @@ public class InputOutputBill implements InputOutput<Bill> {
         }
         Product inventoryProduct = new Product(product.getId(), product.getName(), product.getQuantity() - quantity, product.getPrice());
         productList.set(indexProduct, inventoryProduct);
-        productManagement.writeToFile("File\\product.csv");
+        productManagement.writeToFile(Main.PRODUCT_PATH);
         product.setQuantity(quantity);
         bill.setProduct(product);
         return bill;

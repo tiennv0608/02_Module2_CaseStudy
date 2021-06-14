@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static final String BILL_PATH = "File\\bill.csv";
+    public static final String CUSTOMER_PATH = "File\\customer.csv";
+    public static final String PRODUCT_PATH = "File\\product.csv";
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BillManagement billManagement = new BillManagement();
@@ -72,10 +77,10 @@ public class Main {
                             }
                             break;
                         case 3:
-                            billManagement.readFromFile("File\\bill.csv");
+                            billManagement.readFromFile(BILL_PATH);
                             break;
                         case 4:
-                            billManagement.writeToFile("File\\bill.csv");
+                            billManagement.writeToFile(BILL_PATH);
                             break;
                         default:
                             System.out.println("Invalid!");
@@ -220,11 +225,11 @@ public class Main {
                             }
                             break;
                         case 7:
-                            customerManagement.readFromFile("File\\customer.csv");
+                            customerManagement.readFromFile(CUSTOMER_PATH);
                             System.out.println("Read complete");
                             break;
                         case 8:
-                            customerManagement.writeToFile("File\\customer.csv");
+                            customerManagement.writeToFile(CUSTOMER_PATH);
                             System.out.println("Write complete");
                             break;
                     }
@@ -369,11 +374,11 @@ public class Main {
                                 }
                                 break;
                             case 7:
-                                productManagement.readFromFile("File\\product.csv");
+                                productManagement.readFromFile(PRODUCT_PATH);
                                 System.out.println("Read complete!");
                                 break;
                             case 8:
-                                productManagement.writeToFile("File\\product.csv");
+                                productManagement.writeToFile(PRODUCT_PATH);
                                 System.out.println("Write complete!");
                                 break;
                             default:
