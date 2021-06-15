@@ -86,7 +86,7 @@ public class Main {
                     String answer = scanner.nextLine();
                     if (answer.equals("Y")) {
                         List<PhoneBook> phoneBookList = IOFile.readFromFile(PATH);
-                        phoneBookService.findAll().addAll(phoneBookList);
+                        phoneBookService.setPhoneBookList(phoneBookList);
                     }
                     break;
                 case 7:
