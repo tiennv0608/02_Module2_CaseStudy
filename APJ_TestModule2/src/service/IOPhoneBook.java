@@ -11,15 +11,50 @@ public class IOPhoneBook {
         Scanner scanner = new Scanner(System.in);
         PhoneBook phoneBook = new PhoneBook();
         System.out.print("Nhập nhóm: ");
-        phoneBook.setGroup(scanner.nextLine());
+        String group;
+        do {
+            group = scanner.nextLine();
+            if (group.equals("")) {
+                System.out.print("Không được để trống dữ liệu, nhập lại: ");
+            }
+        } while (group.equals(""));
+        phoneBook.setGroup(group);
         System.out.print("Nhập họ tên: ");
-        phoneBook.setFullName(scanner.nextLine());
+        String fullName;
+        do {
+            fullName = scanner.nextLine();
+            if (fullName.equals("")) {
+                System.out.print("Không được để trống dữ liệu, nhập lại: ");
+            }
+        } while (fullName.equals(""));
+        phoneBook.setFullName(fullName);
         System.out.print("Nhập giới tính: ");
-        phoneBook.setGender(scanner.nextLine());
+        String gender;
+        do {
+            gender = scanner.nextLine();
+            if (gender.equals("")) {
+                System.out.print("Không được để trống dữ liệu, nhập lại: ");
+            }
+        } while (gender.equals(""));
+        phoneBook.setGender(gender);
         System.out.print("Nhập địa chỉ: ");
-        phoneBook.setAddress(scanner.nextLine());
+        String address;
+        do {
+            address = scanner.nextLine();
+            if (address.equals("")) {
+                System.out.print("Không được để trống dữ liệu, nhập lại: ");
+            }
+        } while (address.equals(""));
+        phoneBook.setAddress(address);
         System.out.print("Nhập ngày sinh: ");
-        phoneBook.setDateOfBirth(scanner.nextLine());
+        String dateOfBirth;
+        do {
+            dateOfBirth = scanner.nextLine();
+            if (dateOfBirth.equals("")) {
+                System.out.print("Không được để trống dữ liệu, nhập lại: ");
+            }
+        } while (dateOfBirth.equals(""));
+        phoneBook.setDateOfBirth(dateOfBirth);
         System.out.print("Nhập email (VD: abc@gmail.com): ");
         boolean check;
         String email = scanner.nextLine();

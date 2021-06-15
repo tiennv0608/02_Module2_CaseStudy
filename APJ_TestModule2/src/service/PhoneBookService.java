@@ -18,7 +18,7 @@ public class PhoneBookService {
     }
 
     public List<PhoneBook> findAll() {
-        return phoneBookList;
+        return this.phoneBookList;
     }
 
     public void display() {
