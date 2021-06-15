@@ -2,3 +2,4 @@ Bill ID,Customer ID,Customer Name,Address,Phone,Product ID,Product Name,Quantity
 BILL001,CUS003,Le Tuan Anh,Nghe An,0936.201.509,RICE002,Gao tien vua,20,18000,360000
 BILL002,CUS001,Nguyen Thi Oanh,Hai Phong,0918.234.345,RICE001,Nep cai hoa vang,15,20000,300000
 BILL003,CUS005,Tran Trung Hieu,Ho Chi Minh,0365.888.234,RICE003,BC,20,17000,340000
+BILL004,CUS003,Le Tuan Anh,Nghe An,0936.201.509,RICE001,Nep cai hoa vang,15,20000,300000
